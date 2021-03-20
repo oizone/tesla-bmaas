@@ -2,33 +2,27 @@
 
 export RUNNER_ALLOW_RUNASROOT=1
 export PATH=$PATH:/actions-runner
+API_VERSION=v3
+API_HEADER="Accept: application/vnd.github.${API_VERSION}+json"
+AUTH_HEADER="Authorization: token ${TOKEN}"
 
 deregister_runner() {
-  echo "Caught SIGTERM. Deregistering runner"
-  _TOKEN=$(bash /token.sh)
-  RUNNER_TOKEN=$(echo "${_TOKEN}" | jq -r .token)
-  ./config.sh remove --token "${RUNNER_TOKEN}"
-  exit
+    echo "Caught SIGTERM. Deregistering runner"
+    RUNNER_TOKEN=`curl -X POST -H "${API_HEADER}" -H "${AUTH_HEADER}" https://api.github.com/repos/${REPO}/actions/runners/registration-token|jq -r '.token'`
+    ./config.sh remove --token "${RUNNER_TOKEN}"
+    exit
 }
 
-_RUNNER_NAME=${RUNNER_NAME:-${RUNNER_NAME_PREFIX:-github-runner}-$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')}
-_RUNNER_WORKDIR=${RUNNER_WORKDIR:-/_work}
-_LABELS=${LABELS:-default}
-_SHORT_URL=${REPO_URL}
+RUNNER_TOKEN=`curl -X POST -H "${API_HEADER}" -H "${AUTH_HEADER}" https://api.github.com/repos/${REPO}/actions/runners/registration-token|jq -r '.token'`
 
-if [[ -n "${ACCESS_TOKEN}" ]]; then
-  _TOKEN=$(bash /token.sh)
-  RUNNER_TOKEN=$(echo "${_TOKEN}" | jq -r .token)
-  _SHORT_URL=$(echo "${_TOKEN}" | jq -r .short_url)
-fi
+REPO_URL="https://github.com/${REPO}"
 
 echo "Configuring"
 ./config.sh \
-    --url "${_SHORT_URL}" \
+    --url "${REPO_URL}" \
     --token "${RUNNER_TOKEN}" \
-    --name "${_RUNNER_NAME}" \
-    --work "${_RUNNER_WORKDIR}" \
-    --labels "${_LABELS}" \
+    --name "${RUNNER_NAME}" \
+    --labels "${RUNNER_LABELS}" \
     --unattended \
     --replace
 
@@ -36,3 +30,4 @@ unset RUNNER_TOKEN
 trap deregister_runner SIGINT SIGQUIT SIGTERM
 
 ./bin/runsvc.sh
+
