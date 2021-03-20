@@ -10,8 +10,11 @@ ARG APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=yes
 
 #RUN dpkg -i packages-microsoft-prod.deb
 RUN apt-get update
-RUN apt-get install -y --no-install-recommends python3 unzip xorriso python3-boto3 jq
-#RUN apt-get install -y --no-install-recommends python3 unzip xorriso python3-boto3 powershell
+RUN apt-get install -y --no-install-recommends python3 unzip xorriso python3-boto3 jq nginx gnupg2
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends ansible
+
 
 RUN mkdir /httpboot
 RUN mkdir /iso
