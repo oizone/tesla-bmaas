@@ -126,6 +126,9 @@ for i in ws.iter_rows(min_row=3):
     
 for i in deployments:
     print(i)
+    for o in table:
+        print(o)
+
 
 
 
