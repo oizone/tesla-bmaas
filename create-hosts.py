@@ -82,7 +82,7 @@ for i in ws.iter_rows(min_row=3):
     boot.close()
 
 
-    if of.path.exists('{}/bootx64.efi'.format(ks_folder)):
+    if os.path.exists('{}/bootx64.efi'.format(ks_folder)):
         os.remove('{}/bootx64.efi'.format(ks_folder))
 
     
