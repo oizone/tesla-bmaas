@@ -5,7 +5,8 @@
 
 [redfish]
 r640n01  baseuri=10.39.0.4 fqdn=r640n01.stage1.ci.demo.tieto.com vlan=240 dns1=10.37.0.2 dns2=10.37.0.3 ip=172.16.0.2 netmask=255.255.255.224 gateway=172.16.0.1
-r640n02  baseuri=10.39.0.5 fqdn=r640n02.stage1.ci.demo.tieto.com vlan=240 dns1=10.37.0.2 dns2=10.37.0.3 ip=172.16.0.3 netmask=255.255.255.224 gateway=172.16.0.1
+#r640n02  baseuri=10.39.0.5 fqdn=r640n02.stage1.ci.demo.tieto.com vlan=240 dns1=10.37.0.2 dns2=10.37.0.3 ip=172.16.0.3 netmask=255.255.255.224 gateway=172.16.0.1
+r640n03  baseuri=10.39.0.6 fqdn=r640n03.stage1.ci.demo.tieto.com vlan=240 dns1=10.37.0.2 dns2=10.37.0.3 ip=172.16.0.4 netmask=255.255.255.224 gateway=172.16.0.1
 
 
 [myhosts:children]
