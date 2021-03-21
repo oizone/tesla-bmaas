@@ -1,8 +1,11 @@
 #!/bin/bash
 
-ISOPATH=/iso
+ISOPATH="/iso"
+MOUNTBASE="/httpboot/iso/"
 
 for iso in `find ${ISOPATH} -type f -name "*.iso"`
 do
-    echo ${iso}
+    ISONAME=`echo ${iso}|cut -d"/" -f 3`
+    mkdir "${MOUNTBASE}${ISONAME}"
+    mount -o loop ${iso} "${MOUNTBASE}${ISONAME}"
 done
