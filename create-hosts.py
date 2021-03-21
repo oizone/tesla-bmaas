@@ -128,14 +128,17 @@ for i in ws.iter_rows(min_row=3):
     else:
         os.symlink('{}{}/EFI/BOOT/BOOTX64.EFI'.format(iso_folder,str_esxi),'{}/mboot.efi'.format(ks_folder))
 
-    
+
+output=open("inventory.yml","w+")
 for i in deployments:
-    print(i)
+    output.write('[{}]\n'.format(i))
     for o in table:
         data=o.split(";")
         if data[0] == i:
-            print(data[1])
+            str_dns1=data[5].split(",")[0]
+            str_dns2=data[5].split(",")[1]
+            output.write('{} baseuri={} fqdn={}.{} vlan={} ip={} netmask={} gateway={} dns1={} dns2={}\n'.format(data[1],data[1],data[8],data[6],data[2],data[3],data[4],str_dns1,str_dns2))
 
 
-
+output.close()
 
