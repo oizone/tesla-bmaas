@@ -6,7 +6,7 @@ wb=openpyxl.load_workbook(filename='esxi-hosts.xlsx')
 ws=wb["Hosts"]
 iso_folder="/iso/"
 http_folder="/var/www/httpboot/"
-table=[]
+#table=[]
 
 for i in ws.iter_rows(min_row=3):
     str_hostname=i[0].value
@@ -29,7 +29,12 @@ for i in ws.iter_rows(min_row=3):
     str_deployment=i[17].value
 
     values=[str_deployment,str_hostname,str_ip,str_netmask,str_gateway,str_dns,str_vlan,str_idrac_ip,str_domain]
-    table+=values
+    if not 'table' in locals():
+        table=[values]
+    else:
+        table+=[values]
+
+
     if not 'deployments' in locals():
         deployments=[str_deployment]
     elif not str_deployment in deployments:
