@@ -144,7 +144,7 @@ for i in deployments:
             print(data[6])
             print(data[7])
             print(data[8])
-            #output.write('{} baseuri={} fqdn={}.{} vlan={} ip={} netmask={} gateway={} dns1={} dns2={}\n'.format(data[1],data[1],data[8],data[6],data[2],data[3],data[4],str_dns1,str_dns2))
+            output.write('{} baseuri={} fqdn={}.{} vlan={} ip={} netmask={} gateway={} dns1={} dns2={}\n'.format(data[1],data[7],data[1],data[8],data[6],data[2],data[3],data[4],str_dns1,str_dns2))
 
 
 output.close()
