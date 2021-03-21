@@ -1,5 +1,5 @@
 ---
-- hosts: {{ deployment }}
+- hosts: all
   connection: local
   name: Set BIOS attributes for HTTP boot
   gather_facts: False
