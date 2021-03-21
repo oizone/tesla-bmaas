@@ -6,9 +6,11 @@ wb=openpyxl.load_workbook(filename='esxi-hosts.xlsx')
 ws=wb["Hosts"]
 iso_folder="/iso/"
 http_folder="/var/www/httpboot/"
-
+table=[]
 
 for i in ws.iter_rows(min_row=3):
+    values=[i[0],i[1]]
+    table+=values
     ks='ks={}/{}/ks.cfg'.format(ws['B1'].value,i[0].value)
     ks_folder='{}{}'.format(http_folder,i[0].value)
     #if not os.path.exists(i[0].value):
@@ -99,3 +101,4 @@ for i in ws.iter_rows(min_row=3):
 
     
 
+print(table)
