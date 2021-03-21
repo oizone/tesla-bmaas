@@ -22,7 +22,7 @@
       baseuri: "{{ baseuri }}"
       username: "{{ username }}"
       password: "{{ password }}"
-    register: bios_attribute_boot
+    register: bios_attribute_http
 
   - name: Set BIOS config for HTTP boot (Disable DHCP, Enable VLAN)
     community.general.redfish_config:
@@ -35,7 +35,7 @@
       baseuri: "{{ baseuri }}"
       username: "{{ username }}"
       password: "{{ password }}"
-    register: bios_attribute_boot
+    register: bios_attribute_dhcp
 
   - name: Set BIOS config for HTTP boot (Set IP)
     community.general.redfish_config:
@@ -53,7 +53,7 @@
       baseuri: "{{ baseuri }}"
       username: "{{ username }}"
       password: "{{ password }}"
-    register: bios_attribute_boot
+    register: bios_attribute_ip
 
   - name: Set BIOS config for cpu settings
     community.general.redfish_config:
@@ -88,7 +88,7 @@
       baseuri: "{{ baseuri }}"
       username: "{{ username }}"
       password: "{{ password }}"
-    when: "bios_attribute_cpu.changed or bios_attribute_boot.changed"
+    when: "bios_attribute_cpu.changed or bios_attribute_http.changed or bios_attribute_dhcp.changed or bios_attribute_ip.changed"
 
   - name: Set one-time boot device to UefiHttp
     redfish_command:
