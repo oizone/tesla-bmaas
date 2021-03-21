@@ -70,7 +70,7 @@ for i in ws.iter_rows(min_row=3):
         bootcfg=open("{}{}/BOOT.CFG".format(iso_folder,i[16].value),"r").read()
     else:
         os.system('7z x -y -o{}{} {}{}.iso'.format(iso_folder,i[16].value,iso_folder,i[16].value))
-        os.system('find {} -type d -exec chmod o+rx \{\} \;'.format(iso_folder))
+        os.system('find {} -type d -exec chmod o+rx {} \;'.format(iso_folder,'{}'))
         bootcfg=open("{}{}/BOOT.CFG".format(iso_folder,i[16].value),"r").read()
 
     
