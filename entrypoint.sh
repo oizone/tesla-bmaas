@@ -29,5 +29,6 @@ echo "Configuring"
 unset RUNNER_TOKEN
 trap deregister_runner SIGINT SIGQUIT SIGTERM
 
+/etc/init.d/nginx start
 ./bin/runsvc.sh
 
