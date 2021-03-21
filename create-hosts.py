@@ -125,10 +125,7 @@ for i in ws.iter_rows(min_row=3):
 
     
 for i in deployments:
-    for o in table:
-        print(o[0])
-        if o[0] == i:
-            print(o[2])
+    print(i)
 
 
 
