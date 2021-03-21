@@ -11,10 +11,10 @@
       category: Systems
       command: SetBiosAttributes
       bios_attributes:
-        PxeDev1EnDis": "Disabled"
-        PxeDev2EnDis": "Disabled"
-        PxeDev3EnDis": "Disabled"
-        PxeDev4EnDis": "Disabled"
+        PxeDev1EnDis: "Disabled"
+        PxeDev2EnDis: "Disabled"
+        PxeDev3EnDis: "Disabled"
+        PxeDev4EnDis: "Disabled"
         HttpDev1EnDis: "Enabled"
         HttpDev2EnDis: "Enabled"
         HttpDev3EnDis: "Enabled"
