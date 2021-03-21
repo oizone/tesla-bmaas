@@ -6,12 +6,19 @@
 
   tasks:
 
-  - name: Set BIOS attribute HttpDev1EnDis
+  - name: Set BIOS config for HTTP boot
     community.general.redfish_config:
       category: Systems
       command: SetBiosAttributes
       bios_attributes:
+        PxeDev1EnDis": "Disabled"
+        PxeDev2EnDis": "Disabled"
+        PxeDev3EnDis": "Disabled"
+        PxeDev4EnDis": "Disabled"
         HttpDev1EnDis: "Enabled"
+        HttpDev2EnDis: "Enabled"
+        HttpDev3EnDis: "Enabled"
+        HttpDev4EnDis: "Enabled"
         HttpDev1Uri: "http://10.37.0.26/{{ fqdn }}/mboot.efi"
         HttpDev1VlanEnDis: "Enabled"
         HttpDev1DnsDhcpEnDis: "Disabled"
@@ -26,7 +33,33 @@
       baseuri: "{{ baseuri }}"
       username: "{{ username }}"
       password: "{{ password }}"
-    register: bios_attribute
+    register: bios_attribute_boot
+
+  - name: Set BIOS config for cpu settings
+    community.general.redfish_config:
+      category: Systems
+      command: SetBiosAttributes
+      bios_attributes:
+        LogicalProc: "Enabled"
+        CpuInterconnectBusSpeed: "MaxDataRate"
+        ProcVirtualization: "Enabled"
+        ProcAdjCacheLine: "Enabled"
+        ProcHwPrefetcher: "Enabled"
+        ProcSwPrefetcher: "Enabled"
+        DcuIpPrefetcher: "Enabled"
+        DcuStreamerPrefetcher: "Enabled"
+        LlcPrefetch: "Disabled"
+        UpiPrefetch: "Enabled"
+        DeadLineLlcAlloc: "Enabled"
+        DirectoryAtoS: "Disabled"
+        ProcConfigTdp: "Nominal"
+        ProcX2Apic: "Enabled"
+        ControlledTurbo: "Disabled"
+        ProcCores: "All"
+      baseuri: "{{ baseuri }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+    register: bios_attribute_cpu
 
   - name: Create BIOS configuration job (schedule BIOS setting update)
     community.general.idrac_redfish_command:
@@ -35,8 +68,7 @@
       baseuri: "{{ baseuri }}"
       username: "{{ username }}"
       password: "{{ password }}"
-    when: bios_attribute.changed
-
+    when: "bios_attribute_cpu.changed or bios_attribute_boot.changed"
 
   - name: Set one-time boot device to UefiHttp
     redfish_command:
