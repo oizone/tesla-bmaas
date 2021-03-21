@@ -66,8 +66,12 @@ for i in ws.iter_rows(min_row=3):
     
     if os.path.isfile("{}{}/boot.cfg".format(iso_folder,i[16].value)):
         bootcfg=open("{}{}/boot.cfg".format(iso_folder,i[16].value),"r").read()
-    else:
+    elif os.path.isfile("{}{}/BOOT.CFG".format(iso_folder,i[16].value)):
         bootcfg=open("{}{}/BOOT.CFG".format(iso_folder,i[16].value),"r").read()
+    else:
+        os.system('7z x -y -o"{}{}" {}.iso'.format(iso_folder,i[16].value,i[16].value))
+        bootcfg=open("{}{}/BOOT.CFG".format(iso_folder,i[16].value),"r").read()
+
     
     boot=open("{}/boot.cfg".format(ks_folder),"w+")
     newboot=re.sub("/","",bootcfg,flags=re.M)
