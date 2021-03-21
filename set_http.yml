@@ -1,0 +1,59 @@
+---
+- hosts: myhosts
+  connection: local
+  name: Set BIOS attributes for HTTP boot
+  gather_facts: False
+
+  tasks:
+
+  - name: Set BIOS attribute HttpDev1EnDis
+    community.general.redfish_config:
+      category: Systems
+      command: SetBiosAttributes
+      bios_attributes:
+        HttpDev1EnDis: "Enabled"
+        HttpDev1Uri: "http://10.37.0.26/{{ fqdn }}/mboot.efi"
+        HttpDev1VlanEnDis: "Enabled"
+        HttpDev1DnsDhcpEnDis: "Disabled"
+        HttpDev1Protocol: "IPv4"
+        HttpDev1VlanId: {{ vlan }}
+        HttpDev1Dns1: "{{ dns1 }}"
+        HttpDev1Dns2: "{ dns2 }}"
+        HttpDev1Ip: "{{ ip }}"
+        HttpDev1Mask: "{{ netmask }}"
+        HttpDev1Gateway: "{{ gateway }}"
+      baseuri: "{{ baseuri }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+    register: bios_attribute
+
+  - name: Create BIOS configuration job (schedule BIOS setting update)
+    community.general.idrac_redfish_command:
+      category: Systems
+      command: CreateBiosConfigJob
+      baseuri: "{{ baseuri }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+    when: bios_attribute.changed
+
+
+  - name: Set one-time boot device to UefiHttp
+    redfish_command:
+      category: Systems
+      command: SetOneTimeBoot
+      #bootdevice: "BiosSetup"
+      bootdevice: "UefiHttp"
+      #uefi_target: "{{ uefi_target }}"
+      baseuri: "{{ baseuri }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+
+#  - name: Reboot system
+#    redfish_command:
+#      category: Systems
+#      command: PowerReboot
+#      baseuri: "{{ baseuri }}"
+#      username: "{{ username }}"
+#      password: "{{ password }}"
+
+
