@@ -139,7 +139,7 @@ for i in deployments:
         if data[0] == i:
             str_dns1=data[5].split(",")[0]
             str_dns2=data[5].split(",")[1]
-            output.write('{} baseuri={} fqdn={}.{} username={} password={} vlan={} ip={} netmask={} gateway={} dns1={} dns2={}\n'.format(data[1],data[7],data[1],data[8],data[9],data[10],data[6],data[2],data[3],data[4],str_dns1,str_dns2))
+            output.write('{} baseuri={} fqdn={} username={} password={} vlan={} ip={} netmask={} gateway={} dns1={} dns2={}\n'.format(data[1],data[7],data[1],data[9],data[10],data[6],data[2],data[3],data[4],str_dns1,str_dns2))
 
 
 output.close()
