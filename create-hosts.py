@@ -71,7 +71,8 @@ for i in ws.iter_rows(min_row=3):
     else:
         os.system('7z x -y -o{}{} {}{}.iso'.format(iso_folder,i[16].value,iso_folder,i[16].value))
         os.system('find {} -type d -exec chmod o+rx {} \;'.format(iso_folder,'{}'))
-        bootcfg=open("{}{}/BOOT.CFG".format(iso_folder,i[16].value),"r").read()
+        os.system('find {}{} -mindepth 1 -exec rename 's/(.*)\/([^\/]*)/$1\/\L$2/' {} \;'.format(iso_folder,i[16].value,'{}'))
+        bootcfg=open("{}{}/boot.cfg".format(iso_folder,i[16].value),"r").read()
 
     
     boot=open("{}/boot.cfg".format(ks_folder),"w+")
