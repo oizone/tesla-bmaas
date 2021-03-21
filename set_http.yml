@@ -19,7 +19,7 @@
         HttpDev1Protocol: "IPv4"
         HttpDev1VlanId: "{{ vlan }}"
         HttpDev1Dns1: "{{ dns1 }}"
-        HttpDev1Dns2: "{ dns2 }}"
+        HttpDev1Dns2: "{{ dns2 }}"
         HttpDev1Ip: "{{ ip }}"
         HttpDev1Mask: "{{ netmask }}"
         HttpDev1Gateway: "{{ gateway }}"
