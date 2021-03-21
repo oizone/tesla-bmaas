@@ -28,7 +28,7 @@ for i in ws.iter_rows(min_row=3):
     str_esxi=i[16].value
     str_deployment=i[17].value
 
-    values=[str_hostname,str_ip,str_netmask,str_gateway,str_dns,str_vlan,str_idrac_ip,str_domain,str_deployment]
+    values=[str_deployment,str_hostname,str_ip,str_netmask,str_gateway,str_dns,str_vlan,str_idrac_ip,str_domain]
     table+=values
     if not 'deployments' in locals():
         deployments=[str_deployment]
@@ -124,6 +124,13 @@ for i in ws.iter_rows(min_row=3):
         os.symlink('{}{}/EFI/BOOT/BOOTX64.EFI'.format(iso_folder,str_esxi),'{}/mboot.efi'.format(ks_folder))
 
     
+for i in deployments:
+    for o in table:
+        if o[0] == i:
+            print(o[2])
 
+
+
+            
 print(table)
 print(deployments)
