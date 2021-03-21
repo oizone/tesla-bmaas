@@ -10,11 +10,30 @@ table=[]
 
 for i in ws.iter_rows(min_row=3):
     values=[i[0].value,i[1].value]
+    str_hostaname=i[0].value
+    str_nic=i[1].value
+    str_ips=i[2].value
+    str_netmask=i[3].value
+    str_gateway=i[4].value
+    str_dns=i[5].value
+    str_vlan=i[6].value
+    str_idrac_ip=i[7].value
+    str_disk_sel=i[8].value
+    str_cap_disk=i[9].value
+    str_ntp=i[10].value
+    str_domain=i[11].value
+    str_password=i[12].value
+    str_ceip=i[13].value
+    str_tps=i[14].value
+    str_vsan=i[15].value
+    str_esxi=i[16].value
+    str_deployment=i[17].value
+
     table+=values
-    ks='ks={}/{}/ks.cfg'.format(ws['B1'].value,i[0].value)
-    ks_folder='{}{}'.format(http_folder,i[0].value)
-    #if not os.path.exists(i[0].value):
-    #    os.mkdir(i[0].value)
+    ks='ks={}/{}/ks.cfg'.format(ws['B1'].value,str_hostaname)
+    ks_folder='{}{}'.format(http_folder,str_hostaname)
+    #if not os.path.exists(str_hostaname):
+    #    os.mkdir(str_hostaname)
     if not os.path.exists(ks_folder):
         os.mkdir(ks_folder)
     output=open("{}/ks.cfg".format(ks_folder),"w+")
@@ -27,7 +46,7 @@ for i in ws.iter_rows(min_row=3):
     output.write('install {} --overwritevmfs --novmfsondisk\n'.format(i[8].value))
     output.write('keyboard Finnish\n')
 
-    output.write("network --bootproto=static --device={} --ip={} --netmask={} --gateway={} --nameserver={} --hostname={} --vlanid={} --addvmportgroup=1\n".format(i[1].value,i[2].value,i[3].value,i[4].value,i[5].value,i[0].value,int(i[6].value)))
+    output.write("network --bootproto=static --device={} --ip={} --netmask={} --gateway={} --nameserver={} --hostname={} --vlanid={} --addvmportgroup=1\n".format(i[1].value,i[2].value,i[3].value,i[4].value,i[5].value,str_hostaname,int(i[6].value)))
 
     output.write('reboot --noeject\n')
 
