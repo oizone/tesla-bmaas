@@ -15,7 +15,7 @@
         HttpDev1Uri: "http://10.37.0.26/{{ fqdn }}/mboot.efi"
         HttpDev1VlanEnDis: "Enabled"
         HttpDev1DnsDhcpEnDis: "Disabled"
-	HttpDev1DhcpEnDis: "Disabled"
+        HttpDev1DhcpEnDis: "Disabled"
         HttpDev1Protocol: "IPv4"
         HttpDev1VlanId: {{ vlan }}
         HttpDev1Dns1: "{{ dns1 }}"
