@@ -7,7 +7,6 @@ ws=wb["Hosts"]
 iso_folder="/iso/"
 http_folder="/var/www/httpboot/"
 table=[]
-deployments=[]
 
 for i in ws.iter_rows(min_row=3):
     str_hostname=i[0].value
@@ -31,6 +30,7 @@ for i in ws.iter_rows(min_row=3):
 
     values=[str_hostname,str_ip,str_netmask,str_gateway,str_dns,str_vlan,str_idrac_ip,str_domain,str_deployment]
     table+=values
+
     if not str_deployment in deployments:
         deployments+=[str_deployment]
 
