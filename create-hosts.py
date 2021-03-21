@@ -86,6 +86,8 @@ for i in ws.iter_rows(min_row=3):
     if os.path.exists('{}/bootx64.efi'.format(ks_folder)):
         os.remove('{}/bootx64.efi'.format(ks_folder))
 
+    if not os.path.exists('{}{}'.format(http_folder,i[16].value)):
+        os.symlink('{}{}'.format(iso_folder,i[16].value),'{}{}'.format(http_folder,i[16].value))
     
     if os.path.isfile("{}{}/efi/boot/bootx64.efi".format(iso_folder,i[16].value)):
         os.symlink('{}{}/efi/boot/bootx64.efi'.format(iso_folder,i[16].value),'{}/bootx64.efi'.format(ks_folder))
