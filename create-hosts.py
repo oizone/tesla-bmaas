@@ -10,7 +10,7 @@ table=[]
 deployments=[]
 
 for i in ws.iter_rows(min_row=3):
-    str_hostaname=i[0].value
+    str_hostname=i[0].value
     str_nic=i[1].value
     str_ip=i[2].value
     str_netmask=i[3].value
@@ -34,10 +34,10 @@ for i in ws.iter_rows(min_row=3):
     if not str_deployment in deployments:
         deployments+=str_deployment
 
-    ks='ks={}/{}/ks.cfg'.format(ws['B1'].value,str_hostaname)
-    ks_folder='{}{}'.format(http_folder,str_hostaname)
-    #if not os.path.exists(str_hostaname):
-    #    os.mkdir(str_hostaname)
+    ks='ks={}/{}/ks.cfg'.format(ws['B1'].value,str_hostname)
+    ks_folder='{}{}'.format(http_folder,str_hostname)
+    #if not os.path.exists(str_hostname):
+    #    os.mkdir(str_hostname)
     if not os.path.exists(ks_folder):
         os.mkdir(ks_folder)
     output=open("{}/ks.cfg".format(ks_folder),"w+")
@@ -50,7 +50,7 @@ for i in ws.iter_rows(min_row=3):
     output.write('install {} --overwritevmfs --novmfsondisk\n'.format(str_disk_sel))
     output.write('keyboard Finnish\n')
 
-    output.write("network --bootproto=static --device={} --ip={} --netmask={} --gateway={} --nameserver={} --hostname={} --vlanid={} --addvmportgroup=1\n".format(str_nic,str_ip,str_netmask,str_gateway,str_dns,str_hostaname,int(str_vlan)))
+    output.write("network --bootproto=static --device={} --ip={} --netmask={} --gateway={} --nameserver={} --hostname={} --vlanid={} --addvmportgroup=1\n".format(str_nic,str_ip,str_netmask,str_gateway,str_dns,str_hostname,int(str_vlan)))
 
     output.write('reboot --noeject\n')
 
