@@ -21,6 +21,9 @@ RUN mkdir /httpboot
 RUN mkdir /iso
 
 COPY create-hosts.py /httpboot/
+COPY nginx.conf /httpboot/
+
+RUN ln -sf /httpboot/nginx.conf /etc/nginx/sites-enabled/default
 
 WORKDIR /actions-runner
 COPY install_actions.sh /actions-runner
