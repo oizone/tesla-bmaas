@@ -9,7 +9,7 @@ http_folder="/var/www/httpboot/"
 table=[]
 
 for i in ws.iter_rows(min_row=3):
-    values=[i[0],i[1]]
+    values=[i[0].value,i[1].value]
     table+=values
     ks='ks={}/{}/ks.cfg'.format(ws['B1'].value,i[0].value)
     ks_folder='{}{}'.format(http_folder,i[0].value)
