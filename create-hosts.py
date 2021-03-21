@@ -82,9 +82,9 @@ for i in ws.iter_rows(min_row=3):
     boot.close()
 
     if os.path.isfile("{}{}/efi/boot/bootx64.efi".format(iso_folder,i[16].value)):
-        os.symlink('{}/bootx64.efi'.format(ks_folder),'{}{}/efi/boot/bootx64.efi'.format(iso_folder,i[16].value))
+        os.symlink('{}{}/efi/boot/bootx64.efi'.format(iso_folder,i[16].value)'{}/bootx64.efi'.format(ks_folder))
     else:
-        os.symlink('{}/bootx64.efi'.format(ks_folder),'{}{}/EFI/BOOT/BOOTX64.EFI'.format(iso_folder,i[16].value))
+        os.symlink('{}{}/EFI/BOOT/BOOTX64.EFI'.format(iso_folder,i[16].value))'{}/bootx64.efi'.format(ks_folder))
 
     
 
