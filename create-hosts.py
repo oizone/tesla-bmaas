@@ -27,8 +27,10 @@ for i in ws.iter_rows(min_row=3):
     str_vsan=i[15].value
     str_esxi=i[16].value
     str_deployment=i[17].value
+    str_idrac_user=i[18].value
+    str_idrac_pwd=i[19].value
 
-    values=str_deployment+";"+str_hostname+";"+str_ip+";"+str_netmask+";"+str_gateway+";"+str_dns+";"+str(str_vlan)+";"+str_idrac_ip+";"+str_domain
+    values=str_deployment+";"+str_hostname+";"+str_ip+";"+str_netmask+";"+str_gateway+";"+str_dns+";"+str(str_vlan)+";"+str_idrac_ip+";"+str_domain+";"+str_idrac_user+";"+str_idrac_pwd
     if not 'table' in locals():
         table=[values]
     else:
@@ -137,14 +139,7 @@ for i in deployments:
         if data[0] == i:
             str_dns1=data[5].split(",")[0]
             str_dns2=data[5].split(",")[1]
-            print(data[1])
-            print(data[3])
-            print(data[4])
-            print(data[5])
-            print(data[6])
-            print(data[7])
-            print(data[8])
-            output.write('{} baseuri={} fqdn={}.{} vlan={} ip={} netmask={} gateway={} dns1={} dns2={}\n'.format(data[1],data[7],data[1],data[8],data[6],data[2],data[3],data[4],str_dns1,str_dns2))
+            output.write('{} baseuri={} fqdn={}.{} username={} password={} vlan={} ip={} netmask={} gateway={} dns1={} dns2={}\n'.format(data[1],data[7],data[1],data[8],data[9],data[10],data[6],data[2],data[3],data[4],str_dns1,str_dns2))
 
 
 output.close()
