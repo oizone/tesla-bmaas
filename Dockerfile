@@ -16,6 +16,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends ansible
 RUN ln -sf /iso /var/www/iso
+RUN mkdir /var/www/httpboot
 RUN ansible-galaxy collection install community.general
 
 RUN mkdir /httpboot
