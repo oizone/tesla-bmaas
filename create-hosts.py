@@ -5,7 +5,7 @@ import openpyxl
 wb=openpyxl.load_workbook(filename='esxi-hosts.xlsx')
 ws=wb["Hosts"]
 iso_folder="/iso/"
-http_folder="/httpboot/"
+http_folder="/var/www/httpboot/"
 
 
 for i in ws.iter_rows(min_row=3):
