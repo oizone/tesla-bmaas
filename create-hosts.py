@@ -134,7 +134,7 @@ for i in deployments:
     for o in table:
         data=o.split(";")
         if data[0] == i:
-            print(data[0])
+            print(data[1])
 
 
 
