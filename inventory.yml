@@ -4,8 +4,8 @@
 # that name is fully DNS resolvable.
 
 [redfish]
-redfish1  baseuri=192.168.1.10 username=root password=xxxxxxxx
-redfish2  baseuri=192.168.1.11 username=root password=yyyyyyyy
+r640n01  baseuri=10.39.0.4 username=root password=calvin
+r640n02  baseuri=10.39.0.5 username=root password=calvin
 
 [myhosts:children]
 redfish
@@ -13,7 +13,7 @@ redfish
 [myhosts:vars]
 # Default credentials for OOB controller
 username=root
-password=P@$$word
+password=calvin
 
 # Local directory where all results are placed
 rootdir=~/inventory_files
