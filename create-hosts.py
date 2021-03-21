@@ -63,7 +63,11 @@ for i in ws.iter_rows(min_row=3):
         output.write('esxcli vsan policy setdefault -c vmem -p "((\"hostFailuresToTolerate\" i0) (\"forceProvisioning\" i1))"\n')
     output.write('reboot\n')
     output.close()
-    bootcfg=open("{}{}/boot.cfg".format(iso_folder,i[16].value),"r").read()
+    
+    if not os.path.exists("{}{}/boot.cfg".format(iso_folder,i[16].valus):
+        bootcfg=open("{}{}/boot.cfg".format(iso_folder,i[16].value),"r").read()
+    else:
+        bootcfg=open("{}{}/BOOT.CFG".format(iso_folder,i[16].value),"r").read()
     
     boot=open("{}/boot.cfg".format(ks_folder),"w+")
     newboot=re.sub("/","",bootcfg,flags=re.M)
