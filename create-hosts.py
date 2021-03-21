@@ -69,7 +69,7 @@ for i in ws.iter_rows(min_row=3):
     elif os.path.isfile("{}{}/BOOT.CFG".format(iso_folder,i[16].value)):
         bootcfg=open("{}{}/BOOT.CFG".format(iso_folder,i[16].value),"r").read()
     else:
-        os.system('7z x -y -o"{}{}" {}.iso'.format(iso_folder,i[16].value,i[16].value))
+        os.system('7z x -y -o{}{} {}.iso'.format(iso_folder,i[16].value,i[16].value))
         bootcfg=open("{}{}/BOOT.CFG".format(iso_folder,i[16].value),"r").read()
 
     
