@@ -4,14 +4,18 @@ import re
 import openpyxl
 wb=openpyxl.load_workbook(filename='esxi-hosts.xlsx')
 ws=wb["Hosts"]
-
+iso_folder="/iso/"
+http_folder="/httpboot/"
 
 
 for i in ws.iter_rows(min_row=3):
     ks='ks={}/{}/ks.cfg'.format(ws['B1'].value,i[0].value)
-    if not os.path.exists(i[0].value):
-        os.mkdir(i[0].value)
-    output=open("{}/ks.cfg".format(i[0].value),"w+")
+    ks_folder='{}{}'.format(http_folder,i[0].value)
+    #if not os.path.exists(i[0].value):
+    #    os.mkdir(i[0].value)
+    if not os.path.exists(ks_folder):
+        os.mkdir(ks_folder)
+    output=open("{}/ks.cfg".format(ks_folder),"w+")
 
     output.write('vmaccepteula\n')
  
@@ -59,9 +63,9 @@ for i in ws.iter_rows(min_row=3):
         output.write('esxcli vsan policy setdefault -c vmem -p "((\"hostFailuresToTolerate\" i0) (\"forceProvisioning\" i1))"\n')
     output.write('reboot\n')
     output.close()
-    bootcfg=open("{}/boot.cfg".format(i[16].value),"r").read()
+    bootcfg=open("{}{}/boot.cfg".format(iso_folder,i[16].value),"r").read()
     
-    boot=open("{}/boot.cfg".format(i[0].value),"w+")
+    boot=open("{}/boot.cfg".format(ks_folder),"w+")
     newboot=re.sub("/","",bootcfg,flags=re.M)
     newboot=re.sub(r'title=[^\n]*','title=Loading ESXi installer (https://github.com/oizone/esxihttp)',newboot,flags=re.M)
     newboot=re.sub(r'prefix=[^\n]*','prefix={}/{}/'.format(ws['B1'].value,i[16].value),newboot,flags=re.M)
