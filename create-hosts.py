@@ -28,7 +28,7 @@ for i in ws.iter_rows(min_row=3):
     str_esxi=i[16].value
     str_deployment=i[17].value
 
-    values=str_deployment+"."+str_hostname+"."+str_ip+"."+str_netmask+"."+str_gateway+"."+str_dns+"."+str_vlan+"."+str_idrac_ip+"."+str_domain
+    values=str_deployment+"."+str_hostname+"."+str_ip+"."+str_netmask+"."+str_gateway+"."+str_dns+"."+str(str_vlan)+"."+str_idrac_ip+"."+str_domain
     if not 'table' in locals():
         table=[values]
     else:
