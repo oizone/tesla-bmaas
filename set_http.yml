@@ -6,7 +6,7 @@
 
   tasks:
 
-  - name: Set BIOS config for HTTP boot (Disable DHCP)
+  - name: Set BIOS config for HTTP boot (Enable HTTP boot)
     community.general.redfish_config:
       category: Systems
       command: SetBiosAttributes
@@ -19,6 +19,16 @@
         HttpDev2EnDis: "Enabled"
         HttpDev3EnDis: "Enabled"
         HttpDev4EnDis: "Enabled"
+      baseuri: "{{ baseuri }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+    register: bios_attribute_boot
+
+  - name: Set BIOS config for HTTP boot (Disable DHCP, Enable VLAN)
+    community.general.redfish_config:
+      category: Systems
+      command: SetBiosAttributes
+      bios_attributes:
         HttpDev1VlanEnDis: "Enabled"
         HttpDev1DnsDhcpEnDis: "Disabled"
         HttpDev1DhcpEnDis: "Disabled"
