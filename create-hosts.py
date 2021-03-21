@@ -64,7 +64,7 @@ for i in ws.iter_rows(min_row=3):
     output.write('reboot\n')
     output.close()
     
-    if not os.path.exists("{}{}/boot.cfg".format(iso_folder,i[16].value)):
+    if not os.path.isfile("{}{}/boot.cfg".format(iso_folder,i[16].value)):
         bootcfg=open("{}{}/boot.cfg".format(iso_folder,i[16].value),"r").read()
     else:
         bootcfg=open("{}{}/BOOT.CFG".format(iso_folder,i[16].value),"r").read()
